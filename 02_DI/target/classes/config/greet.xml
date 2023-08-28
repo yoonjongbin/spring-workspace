@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="greet1" class="com.kh.di.Greet"/>
+	
+	<!-- 생성자 주입 -->
+	<bean id="greet2" class="com.kh.di.Greet">
+		<!-- value 속성만 설정해줘도 사용하는데 문제없음!! -->
+		<constructor-arg name="message" value="constructor input" />
+	</bean>
+	
+	<!-- setter 주입 -->
+	<bean id="greet3" class="com.kh.di.Greet">
+		<property name="message" value="setter input"/>
+	</bean>
+
+
+	<!-- ref를 사용한 setter 주입 -->
+	<bean id="str" class="java.lang.String">
+		<constructor-arg value="ref input"/>
+	</bean>
+	<bean id="greet4" class="com.kh.di.Greet">
+		<property name="message" ref="str"/>
+	</bean>
+</beans>
