@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<!-- useGeneratedKeys는 insert를 하는순간 식별자를 설정-->
+	<insert id="insert" parameterType="Board" useGeneratedKeys="true" keyProperty="no" keyColumn="no">
+		INSERT 
+		INTO BOARD(NO, TITLE, CONTENT, WRITER)
+		VALUES(SEQ_BOARD.NEXTVAL, #{title}, #{content}, #{writer})	
+	</insert>
+
+	
+	<select id="selectAll" resultType="Board">
+		SELECT *
+		FROM BOARD
+	</select>
+
+	
+	<select id="select" parameterType="String" resultType="Board">
+		SELECT *
+		FROM BOARD
+		<where>
+			<if test='word != ""'>
+				TITLE LIKE '%'||#{word}||'%'
+				OR CONTENT LIKE '%'||#{word}||'%'
+				OR WRITER LIKE '%'||#{word}||'%'
+			</if>
+		</where>
+	</select>
+
+	
+	<update id="update" parameterType="Board">
+		UPDATE
+		BOARD
+		SET TITLE = #{title}, CONTENT = #{content}, WRITER = #{writer}
+		WHERE NO = #{no}
+	</update>
+	
+	
+	<delete id="delete" parameterType="String">
+		DELETE *
+		FROM BOARD
+		WHERE NO = #{no}
+	</delete>
+</mapper>

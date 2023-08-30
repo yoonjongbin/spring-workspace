@@ -9,7 +9,7 @@ import lombok.Data;
 public class Player {
 	private Dice dice;
 	private int totalValue;
-	
+	public Player() {}
 	public Player(Dice dice) {
 		this.dice = dice;
 	}

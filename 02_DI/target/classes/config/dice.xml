@@ -10,6 +10,7 @@
 	
 	<bean id="player1" class="com.kh.di.Player">
 		<constructor-arg name="dice" ref="dice1" />
+		<property name="dice" ref="dice2"/>
 	</bean>
 	
 	<bean id="player2" class="com.kh.di.Player">
