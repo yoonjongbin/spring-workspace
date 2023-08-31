@@ -15,20 +15,54 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mvc.model.service.BoardService;
 import com.kh.mvc.model.vo.Board;
+import com.kh.mvc.model.vo.Criteria;
+import com.kh.mvc.model.vo.Paging;
 
 @Controller
 @RequestMapping("/board/*")	// 공통된 주소는 뺄수 있다.
 public class BoardController {
+	
 	@Autowired
 	private BoardService service;
 	
 //	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@GetMapping("/list")
-	public void list(Model model) {
-		
-		List<Board> list = service.selectAll();
+	public void list(Criteria cri ,Model model) {
+		List<Board> list = service.selectAll(cri);
+		System.out.println(list);
 		model.addAttribute("list",list);
+		model.addAttribute("paging", new Paging(cri, service.getTotal()));
 	}
+	
+	@GetMapping("/insert")
+	public void insert() {
+		
+	}
+	
+	@PostMapping("/insert")
+	public String insert(Board board) {
+		service.insertBoard(board);
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/view")
+	public void view(int no , Model model) {
+		
+		model.addAttribute("vo", service.select(no));
+	}
+	
+	@PostMapping("/update")
+	public String update(Board board) {
+		service.updateBoard(board);
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(int no){
+		service.deletBoard(no);
+		return "redirect:/board/list";
+	}
+	
 	
 //	@PostMapping("/list")
 //	
@@ -37,8 +71,4 @@ public class BoardController {
 //	@DeleteMapping
 	
 	
-	@RequestMapping("/insert")
-	public void insert() {
-		
-	}
 }

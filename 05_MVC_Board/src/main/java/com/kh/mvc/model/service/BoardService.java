@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.mvc.model.dao.BoardDAO;
 import com.kh.mvc.model.vo.Board;
+import com.kh.mvc.model.vo.Criteria;
 
 @Service
 public class BoardService {
@@ -18,19 +19,23 @@ public class BoardService {
 		return dao.insertBoard(board);
 	}
 	
-	public List<Board> selectAll(){
-		return dao.selectAll();
+	public List<Board> selectAll(Criteria cri){
+		return dao.selectAll(cri);
 	}
 	
-	public List<Board> select(String word){
-		return dao.select(word);
+	public int getTotal() {
+		return dao.getTotal();
+	}
+	
+	public Board select(int no){
+		return dao.select(no);
 	}
 	
 	public int updateBoard(Board board) {
 		return dao.updateBoard(board);
 	}
 	
-	public int deletBoard(String no) {
+	public int deletBoard(int no) {
 		return dao.deleteBoard(no);
 	}
 }
