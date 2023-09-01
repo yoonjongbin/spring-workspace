@@ -7,9 +7,9 @@
 	<insert id="insert" parameterType="Board"
 		useGeneratedKeys="true" keyProperty="no" keyColumn="no">
 		INSERT
-		INTO BOARD(NO, TITLE, CONTENT, WRITER)
+		INTO BOARD(NO, TITLE, CONTENT, WRITER, FILE_URL)
 		VALUES(SEQ_BOARD.NEXTVAL, #{title},
-		#{content}, #{writer})
+		#{content}, #{writer}, #{file_Url})
 	</insert>
 
 
@@ -48,7 +48,7 @@
 	<update id="update" parameterType="Board">
 		UPDATE
 		BOARD
-		SET TITLE = #{title}, CONTENT = #{content}
+		SET TITLE = #{title}, CONTENT = #{content}, FILE_URL = #{file_Url}
 		WHERE NO = #{no}
 	</update>
 

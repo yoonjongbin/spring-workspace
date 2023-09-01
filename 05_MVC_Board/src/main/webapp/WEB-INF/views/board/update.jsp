@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html data-bs-theme="dark">
   <head>
@@ -24,18 +23,23 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div class="container">
-      <h1>게시물 정보</h1>
+      <h1>게시물 수정</h1>
 
-      <form>
+      <form action="/board/update" method="post" enctype="multipart/form-data">
       
       	<input type="hidden" name="no" value="${vo.no}">
+      	<input type="hidden" name="file_Url" value="${vo.file_Url}">
+      	
+      	
         <div class="form-group">
+        
           <label for="title">Title</label>
-          <input type="text" name="title" id="title" class="form-control" value="${vo.title}" readonly />
+          <input type="text" name="title" id="title" class="form-control" value="${vo.title}" />
+       
         </div>
 
-
         <div class="form-group">
+        
           <label for="content">Content</label>
           <textarea
             name="content"
@@ -44,31 +48,30 @@ pageEncoding="UTF-8"%>
             rows="10"
             class="form-control"
             style="resize: none"
-            readonly
-          >
-          ${vo.content}
+          >${vo.content}
           </textarea>
           
-          <!-- <a href="${vo.file_Url}" download><img src="${vo.file_Url}" /></a> -->
-          
-          <!-- a태그의 downlaod 속성이 먹지 않는다면 DownloadView 클래스 방식으로 하면 무조건 해결된다. -->
-         <a href="/board/download?fileName=${fn:replace(vo.file_Url, '/upload', '')}" ><img src="${vo.file_Url}" /></a>
-          
-          
-          
         </div>
-
+        
+        
+        <div class="form-group">
+        
+        	<label for="uploadFile">Add File</label>
+        	<input class="form-control" type="file" id="uploadFile" name="uploadFile" accept="image/*" />
+        
+        </div>
+        
 
         <div class="form-group">
+        
           <label for="writer">Writer</label>
           <input type="text" id="writer" name="writer" class="form-control" value="${vo.writer}"  readonly/>
+        
         </div>
 
-        <a class="btn btn-outline-warning" href="/board/update?no=${vo.no}">수정</a>
-        <a class="btn btn-outline-danger" href="/board/delete?no=${vo.no}">삭제</a>
+        <button type="submit" class="btn btn-outline-warning">수정</button>
         
       </form>
-      
     </div>
   </body>
 </html>
