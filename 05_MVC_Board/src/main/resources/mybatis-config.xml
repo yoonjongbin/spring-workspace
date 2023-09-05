@@ -7,7 +7,11 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias type="com.kh.mvc.model.vo.Board" alias="Board" />
+		<!-- 
+			package로 따오게 되면 클래스가 추가 될때마다 인식하며 
+			별칭(alias)는 클래스의 이름을 따라간다.
+		 -->
+		<package name="com.kh.mvc.model.vo"/>
 	</typeAliases>
 
 
@@ -33,6 +37,7 @@
 
 	<mappers>
 		<mapper resource="mappers/board-mapper.xml" />
+		<mapper resource="mappers/member-mapper.xml" />
 	</mappers>
 
 </configuration>

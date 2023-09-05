@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
@@ -50,7 +51,7 @@ pageEncoding="UTF-8"%>
 
         <div class="form-group">
           <label for="writer">Writer</label>
-          <input type="text" id="writer" name="writer" class="form-control" />
+          <input type="text" id="writer" name="writer" class="form-control" readonly value="<sec:authentication property='principal.username'/>" />
         </div>
 
         <button type="submit" class="btn btn-outline-warning">등록</button>

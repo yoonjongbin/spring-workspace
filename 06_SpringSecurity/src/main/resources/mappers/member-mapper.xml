@@ -13,5 +13,10 @@
 		FROM MEMBER
 		WHERE id = #{username}
 	</select>
+	
+	<select id="selectAll" resultType="Member">
+		SELECT *
+		FROM MEMBER
+	</select>
 
 </mapper>

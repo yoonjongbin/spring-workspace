@@ -17,6 +17,7 @@ public class Member implements UserDetails {
 	private String address;
 	private String auth;
 	private int enabled;
+	private String file_url;
 	
 	// getAuthorities : 회원의 auth(role) 정보 getter
 	

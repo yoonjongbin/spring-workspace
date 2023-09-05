@@ -164,7 +164,10 @@
       
       
       
-      <Context docBase="06_SpringSecurity" path="/" reloadable="true" source="org.eclipse.jst.jee.server:06_SpringSecurity"/></Host>
+      <Context docBase="05_MVC_Board" path="/" reloadable="true" source="org.eclipse.jst.jee.server:05_MVC_Board"/>
+      
+      <Context docBase="D:\spring-workspace\05_MVC_Board\src\main\webapp\upload" path="/upload" />
+      </Host>
     </Engine>
   </Service>
 </Server>

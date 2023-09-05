@@ -21,11 +21,13 @@ public class MemberService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		System.out.println("멤버 서비스." + username);
 		
 		Member member = dao.getMemberById(username);
 		if(member == null) {
 			throw new UsernameNotFoundException("username : " + username + "not found");
 		}
+		System.out.println("ROLE과 비교할 AUTH : " + member.getAuthorities());
 		return member;
 		
 	}
