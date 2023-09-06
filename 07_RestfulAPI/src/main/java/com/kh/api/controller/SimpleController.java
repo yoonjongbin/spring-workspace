@@ -31,7 +31,7 @@ import com.kh.api.model.Person;
  * 
  * JSON (JavaScript Object Notation)
  * 
- * - 데이터를 { }롤 묶어서 키와 값으로 구성하는 데이터 포맷
+ * - 데이터를 { }로 묶어서 키와 값으로 구성하는 데이터 포맷
  * 
  * */
 

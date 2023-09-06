@@ -3,28 +3,92 @@
 
 <mapper namespace="phone">
 	
-	<insert id="insert">
+	<resultMap type="Phone" id="phoneWithCompany">
+	
+		<id column="num" property="num"/>
+		<result column="model" property="model" />
+		<result column="price" property="price" />
+		<result column="vcode" property="vcode" />
+		<association property="company" javaType="Company">
+			<id column="vcode" property="vcode" />
+			<result column="vendor" property="vendor" />
+		</association>
+		
+	</resultMap>
+	
+	
+	<insert id="insert" parameterType="Phone">
+	
+		INSERT INTO
+		Phone(num, model, price, vcode)
+		VALUES(#{num}, #{model}, #{price}, #{vcode})
 		
 	</insert>
 	
 	
 	<!-- Dynamic Query : selectAll + selectOne (num) -->
-	<select id="select">
+	<select id="select" parameterType="String" resultMap="phoneWithCompany">
 	
+		SELECT num, model, price, vcode, vcode, vendor
+		FROM Phone 
+		JOIN company USING(vcode)
+		<if test="num != null">
+			WHERE num = #{num}
+		</if>
+		
 	</select>
 	
-	<delete id="delete">
 	
+	
+	<delete id="delete" parameterType="String">
+	
+		DELETE 
+		FROM Phone
+		WHERE num = #{num} 
+		
 	</delete>
 	
-	<update id="update">
 	
+	
+	<update id="update" parameterType="Phone" >
+	
+		UPDATE 
+		Phone
+		SET model = #{model},
+			price = #{price},
+			vcode = #{vcode}
+		WHERE num = #{num}
+		
 	</update>
+	
+	
 	
 	<!-- Dynamic Query : id와 pw 둘다 입력했을때랑 id만 입력했을때 -->
 	
-	<select id="selectUser">
+	<select id="selectUser" parameterType="UserInfo" resultType="UserInfo">
 	
+		<!-- 
+		SELECT *
+		FROM UserInfo
+		<where>
+			<choose>
+				<when test="#{pw} != null">
+					id = #{id}
+					AND pw = #{pw}
+				</when>
+				<otherwise>
+					id = #{id}
+				</otherwise>
+			</choose>
+		</where>
+		 -->	
+		 
+		SELECT id, pw
+		FROM userinfo
+		WHERE id=#{id}
+		<if test="pw != null">
+			AND pw=#{pw}
+		</if>
 	</select>
 	
 </mapper>

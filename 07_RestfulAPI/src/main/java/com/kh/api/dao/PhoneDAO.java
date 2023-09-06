@@ -8,9 +8,10 @@ import com.kh.api.model.UserInfo;
 public interface PhoneDAO {	// impl -> PhoneDAOImpl
 	
 	int insert(Phone phone);
-	int delete (List<String> list);
+	int update(Phone phone);
+	int delete (String num);
 	
-	Phone select(Phone phone);
+	Phone select(String num);
 	List<Phone> select();
 	UserInfo select(UserInfo user);
 	
